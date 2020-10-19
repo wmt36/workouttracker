@@ -28,6 +28,10 @@ const exercisesSchema = new Schema({
     time: {
         type: Number,
         required: 'Enter the duration of your workout in minites'
+    },
+    distance: {
+        type: Number,
+        required: 'Enter distance travled'
     }
 });
 const Exercises = mongoose.model('Exercises', exercisesSchema)
