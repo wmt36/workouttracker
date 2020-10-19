@@ -50,7 +50,7 @@ router.put('/api/workouts/:id', ({
         }, {
             $set: {
                 workouts
-            }
+            }            
         },
         (err, edited) => {
             if (err) {
@@ -61,7 +61,9 @@ router.put('/api/workouts/:id', ({
                 res.send(edited);
 
             }
+            
         })
+        console.log(workouts) 
 })
 
 module.exports = router
