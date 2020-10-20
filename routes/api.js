@@ -15,7 +15,7 @@ router.post('/api/workouts/:id', ({
         .catch(err => {
             res.status(400).json(err)
         });
-        console.log(`This is creating the: ${workout}`) 
+        console.log(`This is creating the workout: ${workout}`) 
 
 });
 //adding the workouts to the database
@@ -30,7 +30,7 @@ router.post('/api/workouts/:id', ({
         .catch(err => {
             res.status(400).json(err)
         })
-        console.log(`This is adding the: ${workout}`)
+        console.log(`This is adding the workout to the database: ${workout}`)
 });
 //finding the workout that were added to the database
 router.get('/api/workouts/', (req, res) => {
@@ -47,7 +47,7 @@ router.get('/api/workouts/', (req, res) => {
         .catch(err => {
             res.status(400).json(err);
         });
-        console.log(`This is showing the: ${workout}`)
+        console.log(`This is showing the workout: ${workout}`)
 });
 //updating the selected workouts
 router.put('/api/workouts/:id', ({
@@ -73,7 +73,7 @@ router.put('/api/workouts/:id', ({
             }
             
         })
-        console.log(`This is updating the: ${workout}`)
+        console.log(`This is updating the workout: ${workout}`)
 })
 
 module.exports = router
