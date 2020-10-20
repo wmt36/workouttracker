@@ -35,7 +35,7 @@ function tallyExercises(exercises) {
 
 function formatDate(date) {
   const options = {
-    weekday: "long",
+    weekday: "long", 
     year: "numeric",
     month: "long",
     day: "numeric"
