@@ -3,7 +3,7 @@ const mongojs = require('mongojs')
 const Exercises = require('../models/index.js');
 
 
-//creating the workout
+//adding workout to the database the workout
 router.post('/api/workouts/:id', ({
     body
 }, res) => {
