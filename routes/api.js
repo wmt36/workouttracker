@@ -1,79 +1,82 @@
 const router = require('express').Router();
-const mongojs = require('mongojs')
 const Workout = require('../models/index.js');
 
 
 //adding workout to the database the workout
-router.post('/api/workouts/:id', ({
+router.post('/api/workouts', ({
     body
 }, res) => {
-    let workout = mongojs
+   
+    console.log(body)
     Workout.create(body)
         .then(workout => {
+            console.log(`This is creating the workout: ${workout}`) 
             res.json(workout)
         })
         .catch(err => {
             res.status(400).json(err)
         });
-        console.log(`This is creating the workout: ${workout}`) 
+        
 
 });
-//adding the workouts to the database
-router.post('/api/workouts/:id', ({
-    body
-}, res) => {
-    let workout = mongojs
-    Workout.insertMany(body)
-        .then(workout => {
-            res.json(workout)
-        })
-        .catch(err => {
-            res.status(400).json(err)
-        })
-        console.log(`This is adding the workout to the database: ${workout}`)
-});
 //finding the workout that were added to the database
-router.get('/api/workouts/', (req, res) => {
-    let workout = mongojs.workout
-    Workout.find({
-            workout
-        })
+router.get('/api/workouts', (req, res) => {
+ 
+    Workout.find({})
         .sort({
             workout: 1
         })
         .then(workout => {
+            console.log(`This is showing the workout: ${workout}`)
             res.json(workout);
         })
         .catch(err => {
             res.status(400).json(err);
         });
-        console.log(`This is showing the workout: ${workout}`)
+        
 });
 //updating the selected workouts
 router.put('/api/workouts/:id', ({
-    params
+    params, body
 }, res) => {
-    let workout = mongojs
-    Workout.update({
-        
-            _id: mongojs.ObjectID(params.id)
-        }, {
-            $set: {
-                workout
-            }            
-        },
-        (err, edited) => {
-            if (err) {
-                console.log(err);
-                res.send(err)
-            } else {
-                console.log(edited)
-                res.send(edited);
-
-            }
-            
+    Workout.findByIdAndUpdate({ _id: params.id },
+        {$push: {exercises: body }})
+        .then(workout => {
+            console.log(`This is updating the workout: ${workout}`) 
+            res.json(workout);
         })
-        console.log(`This is updating the workout: ${workout}`)
+        .catch(err => {
+            res.status(400).json(err);
+        });
+        
 })
-
+router.get('/api/workouts/range', (req, res) => {
+    
+    Workout.find({})
+        .sort({
+            workout: 1
+        })
+        .then(workout => {
+            console.log(`This is showing the workout: ${workout}`)
+            res.json(workout);
+        })
+        .catch(err => {
+            res.status(400).json(err);
+        });
+        
+});
+router.put('/api/workouts/range/:id', ({
+    params, body
+}, res) => {
+    Workout.findByIdAndUpdate({ _id: params.id },
+        {$push: {exercises: body }})
+        .then(workout => {
+            console.log(`This is updating the stats: ${workout}`) 
+            res.json(workout);
+        })
+        .catch(err => {
+            res.status(400).json(err);
+        });
+        
+})
 module.exports = router
